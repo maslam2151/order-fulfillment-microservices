@@ -13,6 +13,7 @@ The system consists of two independent microservices that communicate via **REST
 ## Table of Contents
 
 * [Project Overview](#project-overview)
+* [System Overview](#system-overview)
 * [System Architecture](#system-architecture)
 * [Order Processing Workflow](#order-processing-workflow)
 * [Service Component Architecture](#service-component-architecture)
