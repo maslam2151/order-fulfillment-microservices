@@ -1,41 +1,96 @@
 # Order Fulfillment Microservices System
 
-A distributed backend system built using **Java and Spring Boot microservices** to simulate a real-world order processing workflow.
+A distributed backend system built using **Java and Spring Boot microservices** to simulate a real-world **order processing and inventory management workflow**.
 
-The system contains two independent services that communicate through REST APIs.
-
-Order Service → Handles customer orders  
-Inventory Service → Manages product stock
-
-When an order is created, the Order Service checks the Inventory Service to verify stock availability before confirming the order.
+The system consists of two independent microservices that communicate via **REST APIs** to validate inventory availability before processing customer orders.
 
 ---
 
-# Architecture
+## Table of Contents
 
-Client Request
-      |
-      v
-Order Service (Port 8080)
-      |
-REST API Call
-      |
-Inventory Service (Port 8081)
-      |
-Database (H2 / JPA)
+* [Project Overview](#project-overview)
+* [System Architecture](#system-architecture)
+* [Order Processing Workflow](#order-processing-workflow)
+* [Service Component Architecture](#service-component-architecture)
+* [Tech Stack](#tech-stack)
+* [Microservices](#microservices)
+* [Running the Project](#running-the-project)
+* [Example Workflow](#example-workflow)
+* [Future Improvements](#future-improvements)
+* [Author](#author)
+
+---
+
+# Project Overview
+
+This project demonstrates a **microservices-based backend architecture** where services communicate through REST APIs to complete business operations.
+
+The system includes:
+
+**Order Service**
+Handles customer orders and communicates with the inventory service to validate stock availability.
+
+**Inventory Service**
+Maintains product inventory and responds to stock availability checks.
+
+When a client places an order, the **Order Service first checks the Inventory Service**. If the product is available, the order is created; otherwise an error response is returned.
+
+---
+
+# System Architecture
+
+![System Architecture](system-architecture.png)
+
+The architecture follows a **simple microservices pattern** where services are deployed independently and communicate through HTTP REST calls.
+
+Flow:
+
+Client → Order Service → Inventory Service → Database
+
+---
+
+# Order Processing Workflow
+
+![Order Processing Workflow](order-processing-workflow.png)
+
+Order processing steps:
+
+1. Client sends an order request.
+2. Order Service receives the request.
+3. Order Service calls Inventory Service.
+4. Inventory Service checks stock availability.
+5. Order Service creates the order if stock is available.
+
+---
+
+# Service Component Architecture
+
+![Service Component Architecture](service-component-architecture.png)
+
+Each microservice follows a layered architecture:
+
+Controller → Service → Repository → Database
+
+This structure improves:
+
+* Code maintainability
+* Separation of concerns
+* Testability
 
 ---
 
 # Tech Stack
 
-- Java
-- Spring Boot
-- Spring Data JPA
-- REST APIs
-- Maven
-- H2 Database
-- Microservices Architecture
-- Git
+| Category        | Technology      |
+| --------------- | --------------- |
+| Language        | Java            |
+| Framework       | Spring Boot     |
+| Persistence     | Spring Data JPA |
+| APIs            | REST            |
+| Build Tool      | Maven           |
+| Database        | H2              |
+| Architecture    | Microservices   |
+| Version Control | Git             |
 
 ---
 
@@ -43,12 +98,14 @@ Database (H2 / JPA)
 
 ## Order Service
 
-Handles order processing.
+Responsible for handling customer order requests.
 
 Endpoints:
 
-POST /orders  
+```
+POST /orders
 GET /orders
+```
 
 Example request:
 
@@ -59,18 +116,20 @@ Example request:
 }
 ```
 
-Before creating an order, the service calls the Inventory Service to check if the product is available.
+Before creating the order, the service calls the **Inventory Service** to check stock availability.
 
 ---
 
 ## Inventory Service
 
-Manages product inventory.
+Responsible for managing product inventory.
 
 Endpoints:
 
-POST /inventory  
+```
+POST /inventory
 GET /inventory/check
+```
 
 Example request:
 
@@ -99,7 +158,7 @@ cd order-service
 mvn spring-boot:run
 ```
 
-Services will run on:
+Services run on:
 
 ```
 Order Service     http://localhost:8080
@@ -110,25 +169,30 @@ Inventory Service http://localhost:8081
 
 # Example Workflow
 
-1. Add inventory through the Inventory Service.
+1. Add inventory using the Inventory Service.
 2. Send an order request to the Order Service.
-3. Order Service calls Inventory Service.
+3. Order Service calls Inventory Service to validate stock.
 4. If stock exists → order is created.
-5. If stock does not exist → error returned.
+5. If stock does not exist → an error response is returned.
 
 ---
 
 # Future Improvements
 
-- Docker containerization
-- PostgreSQL database
-- Service discovery (Eureka)
-- API Gateway
-- AWS deployment
+Potential production improvements:
+
+* Docker containerization
+* PostgreSQL database integration
+* Service discovery using Eureka
+* API Gateway implementation
+* AWS cloud deployment
+* Centralized logging and monitoring
 
 ---
 
 # Author
 
-Mohammed Aslam  
-GitHub: https://github.com/maslam2151
+Mohammed Aslam
+
+GitHub:
+https://github.com/maslam2151
