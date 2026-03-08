@@ -1,5 +1,9 @@
 # Order Fulfillment Microservices System
 
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Spring Boot](https://img.shields.io/badge/SpringBoot-Microservices-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
 A distributed backend system built using **Java and Spring Boot microservices** to simulate a real-world **order processing and inventory management workflow**.
 
 The system consists of two independent microservices that communicate via **REST APIs** to validate inventory availability before processing customer orders.
