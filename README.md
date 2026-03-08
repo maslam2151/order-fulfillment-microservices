@@ -39,7 +39,9 @@ When a client places an order, the **Order Service first checks the Inventory Se
 
 # System Architecture
 
-![System Architecture](system-architecture.png)
+# System Architecture
+
+![System Architecture](System-Architecture.png)
 
 The architecture follows a **simple microservices pattern** where services are deployed independently and communicate through HTTP REST calls.
 
