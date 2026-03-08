@@ -41,6 +41,19 @@ When a client places an order, the **Order Service first checks the Inventory Se
 
 ---
 
+## System Components
+
+The system contains two independent services:
+
+| Service | Port | Responsibility |
+|------|------|------|
+| Order Service | 8080 | Handles order creation and validation |
+| Inventory Service | 8081 | Manages product inventory and stock validation |
+
+Both services communicate via REST APIs.
+
+---
+
 # System Architecture
 
 ![System Architecture](System-Architecture.png)
