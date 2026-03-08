@@ -28,7 +28,7 @@ This project demonstrates a **microservices-based backend architecture** where s
 The system includes:
 
 **Order Service**
-Handles customer orders and communicates with the inventory service to validate stock availability.
+Handles customer order creation and communicates with the inventory service to validate stock availability.
 
 **Inventory Service**
 Maintains product inventory and responds to stock availability checks.
@@ -39,11 +39,9 @@ When a client places an order, the **Order Service first checks the Inventory Se
 
 # System Architecture
 
-# System Architecture
-
 ![System Architecture](System-Architecture.png)
 
-The architecture follows a **simple microservices pattern** where services are deployed independently and communicate through HTTP REST calls.
+The architecture follows a **microservices design pattern** where services are independently deployed and communicate using HTTP REST APIs.
 
 Flow:
 
@@ -53,31 +51,33 @@ Client → Order Service → Inventory Service → Database
 
 # Order Processing Workflow
 
-![Order Processing Workflow](order-processing-workflow.png)
+![Order Processing Workflow](Order-processing-workflow.png)
 
-Order processing steps:
+Order processing sequence:
 
 1. Client sends an order request.
 2. Order Service receives the request.
 3. Order Service calls Inventory Service.
-4. Inventory Service checks stock availability.
+4. Inventory Service verifies product stock.
 5. Order Service creates the order if stock is available.
+6. If stock is unavailable, an error response is returned.
 
 ---
 
 # Service Component Architecture
 
-![Service Component Architecture](service-component-architecture.png)
+![Service Component Architecture](Service-component-Architecture.png)
 
 Each microservice follows a layered architecture:
 
 Controller → Service → Repository → Database
 
-This structure improves:
+This layered design improves:
 
-* Code maintainability
+* Maintainability
 * Separation of concerns
 * Testability
+* Scalability
 
 ---
 
@@ -100,14 +100,12 @@ This structure improves:
 
 ## Order Service
 
-Responsible for handling customer order requests.
+Responsible for processing customer orders.
 
 Endpoints:
 
-```
 POST /orders
 GET /orders
-```
 
 Example request:
 
@@ -128,10 +126,8 @@ Responsible for managing product inventory.
 
 Endpoints:
 
-```
 POST /inventory
 GET /inventory/check
-```
 
 Example request:
 
@@ -146,21 +142,21 @@ Example request:
 
 # Running the Project
 
-Start Inventory Service:
+Start **Inventory Service**:
 
 ```
 cd inventory-service
 mvn spring-boot:run
 ```
 
-Start Order Service:
+Start **Order Service**:
 
 ```
 cd order-service
 mvn spring-boot:run
 ```
 
-Services run on:
+Services will run on:
 
 ```
 Order Service     http://localhost:8080
@@ -171,23 +167,23 @@ Inventory Service http://localhost:8081
 
 # Example Workflow
 
-1. Add inventory using the Inventory Service.
-2. Send an order request to the Order Service.
-3. Order Service calls Inventory Service to validate stock.
+1. Add inventory through the **Inventory Service**.
+2. Send an order request to the **Order Service**.
+3. Order Service calls Inventory Service to verify stock.
 4. If stock exists → order is created.
-5. If stock does not exist → an error response is returned.
+5. If stock does not exist → error returned.
 
 ---
 
 # Future Improvements
 
-Potential production improvements:
+Possible enhancements for production-level architecture:
 
 * Docker containerization
 * PostgreSQL database integration
 * Service discovery using Eureka
 * API Gateway implementation
-* AWS cloud deployment
+* AWS deployment
 * Centralized logging and monitoring
 
 ---
@@ -195,6 +191,4 @@ Potential production improvements:
 # Author
 
 Mohammed Aslam
-
-GitHub:
-https://github.com/maslam2151
+GitHub: https://github.com/maslam2151
